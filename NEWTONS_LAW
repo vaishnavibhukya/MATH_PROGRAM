@@ -1,0 +1,28 @@
+import math
+
+def find_temperature():
+    s_temp = int(input('Enter the surrounding or air temperature (degrees centigrade): '))
+    i_temp = int(input('Enter the initial temperature of body (degrees centigrade): '))
+    temp_drop = int(input('Enter the dropped temperature of body (degrees centigrade): ')) 
+    t1 = int(input('Enter the time at which temperature dropped (minutes): '))
+    t2 = int(input('Enter time at which temperature to be found (minutes): '))
+    c = i_temp - s_temp
+    k = (math.log(c/(i_temp - temp_drop)))/t1
+
+    # To find temperature at given time
+    temp = s_temp + (c * (math.exp(-k*t2)))
+    print('The temperature of body after',t2,'minutes is',temp,'degrees centigrade')
+
+
+def find_time():
+    s_temp = int(input('Enter the surrounding or air temperature (degrees centigrade): '))
+    i_temp = int(input('Enter the initial temperature of body (degrees centigrade): '))
+    temp_drop = int(input('Enter the dropped temperature of body (degrees centigrade): ')) 
+    t1 = int(input('Enter the time at which temperature dropped (minutes): '))
+    f_temp = int(input('Enter temperature at which the time is to be found (degrees centigrade): '))
+    c = i_temp - s_temp
+    k = (math.log(c/(i_temp - temp_drop)))/t1
+
+    # To find time at given temperature
+    time = (math.log(c/(f_temp - s_temp)))/k
+    print('The time at',f_temp,'temperature is',time,'minutes')
