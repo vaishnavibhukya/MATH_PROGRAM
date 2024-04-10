@@ -1,0 +1,37 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the differential equation for Newton's Law of Growth
+def newtons_law_of_growth(P, t, k):
+    dPdt = k * P
+    return dPdt
+
+# Solve the differential equation using Euler's method
+def euler_method(func, initial_condition, t_values, *args):
+    P_values = [initial_condition]
+    dt = t_values[1] - t_values[0]
+
+    for i in range(1, len(t_values)):
+        P = P_values[-1]
+        dPdt = func(P, t_values[i-1], *args)
+        P_new = P + dPdt * dt
+        P_values.append(P_new)
+
+    return np.array(P_values)
+
+# Parameters
+P_initial = 1000  # Initial quantity
+k = 0.1           # Growth rate
+t_values = np.linspace(0, 10, 100)  # Time values for evaluation
+
+# Solve the differential equation
+P_values = euler_method(newtons_law_of_growth, P_initial, t_values, k)
+
+# Plot the results
+plt.plot(t_values, P_values, label='Quantity')
+plt.title("Newton's Law of Growth")
+plt.xlabel('Time')
+plt.ylabel('Quantity')
+plt.legend()
+plt.grid(True)
+plt.show()
